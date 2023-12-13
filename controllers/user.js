@@ -1,5 +1,6 @@
 const User=require("../modals/user");
 const bcrypt=require("bcrypt");
+const jwt=require('jsonwebtoken');
 const userServices=require("../services/userService");
 
 
@@ -35,4 +36,26 @@ exports.signUp=async(request,response)=>{
         console.log(error)
         return response.status(500).json(error);
     }
+}
+
+
+
+exports.logIn=async(request,response)=>{
+    try{
+        const {email,password}=request.body;
+        const user=await userServices.getUserbyemail(email);
+        if(!user)return response.status(409).json('User doesnt exists');
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (isPasswordValid) {
+            const token = jwt.sign({ userId: user.id }, process.env.SECRETE_KEY, { expiresIn: '1h' });
+            response.cookie('token', token, { maxAge: 3600000 });
+            return response.status(200).json({ message: "Login Successful" })
+        } else {
+            return response.status(401).json({ message: 'Invalid Password!' })
+        }
+        }
+        catch(error){
+            console.log(error);
+            return response.status(500).json(error);
+        }
 }
