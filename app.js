@@ -11,7 +11,11 @@ const sequelize=require('./util/database')
 const userRoutes=require('./routes/user');
 
 const app=new express();
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods:['GET','POST'],
+  
+  }));
 
 app.use(express.json());
 
