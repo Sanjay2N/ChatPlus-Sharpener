@@ -2,130 +2,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="icon" href="/images/logo2_1.jpg" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/main.css">
     <title>ChatPlus</title>
 </head>
-<body class="bg-blue-300" id="signup-div">
-    <div class="w-full h-full  justify-center hidden">
-        <div class="w-1/2 mx-auto mt-10">
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="signup-form">
-              <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-                  Name
-                </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  focus:shadow-outline" id="name" type="text" placeholder="Username">
-              </div>
-              <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                  Email 
-                </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  focus:shadow-outline" id="email" type="email" placeholder="Email">
-              </div>
-              <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="phonenumber">
-                  Phone Number 
-                </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  focus:shadow-outline" id="phonenumber" type="tel" placeholder="Phone Number">
-              </div>
-              <div class="mb-3">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password1">
-                  Password 
-                </label>
-                <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight  focus:shadow-outline" id="password1" type="password" placeholder="******************">
-              </div>
-              <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password2">
-                  Confirm Password 
-                </label>
-                <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight  focus:shadow-outline" id="password2" type="password" placeholder="******************">
-              </div>
-              <div class="flex items-center justify-between mb-4">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="signup-button">
-                  Sign Up
-                </button>
-            </div>
-            
-            <h5 class="block mb-3"> Already have an account? <a class=" align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#" id="login-button">
-                Log In
-              </a></h5>
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative hidden" role="alert" id="alert1">
-                <span class="block sm:inline">SignUp Successfull.</span>
-                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                  <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                </span>
-              </div>
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative hidden" role="alert" id="alert2">
-                <span class="block sm:inline">User Already Exists.</span>
-                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                  <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                </span>
-              </div>
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative hidden" role="alert" id="alert3">
-                <span class="block sm:inline">Both Password Should Be Same.</span>
-                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                  <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                </span>
-              </div>
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative hidden" role="alert" id="alert4">
-                <span class="block sm:inline">Some Fields Missing.</span>
-                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                  <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                </span>
-              </div>
-            </form>
+<!-- from-violet-950 via-violet-900 to-purple-950 -->
+<body class="">
+    <nav class="flex items-center justify-between flex-wrap  p-5 -mt-1" id="nav">
+        <div class="flex items-center flex-shrink-0 text-white mr-6 cursor-pointer" onclick="window.location.reload()">
+        <img class="fill-current h-11 w-11 mr-2 rounded-lg" src="/images/logo2_1.jpg" alt="" >
+          <span class="font-semibold text-2xl tracking-tight">ChatPlus</span>
+        </div>
+        <div class="block lg:hidden">
+          <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+          </button>
+        </div>
+        <div class="w-full block  lg:flex lg:items-center lg:w-auto">
+          <div class="text-lg tracking-wider font-light lg:flex-grow">
+            <a href="#" class="block mt-4 text-pink-400 underline underline-offset-4  lg:inline-block lg:mt-0 hover:text-fuchsia-400 mr-5" id="home-button">
+              Home
+            </a>
+            <a href="#" class="block mt-4 text-white  lg:inline-block lg:mt-0 hover:text-fuchsia-400 mr-5" id="login-button">
+              Log In
+            </a>
+            <!-- bg-purple-800 rounded-lg  hover:scale-110 transition duration-300 ease-in-out -->
+            <a href="#" class="block mt-4 text-white  lg:inline-block lg:mt-0 hover:text-fuchsia-400 mr-5" id="join-button1">
+                Join
+            </a>
           </div>
-    </div>
-    <div class="w-full h-full justify-center " id="login-div">
-        <div class="w-1/2 mx-auto my-20">
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="login-form">
+        </div>
+      </nav>
+
+      <div class="flex ">
+        <div class=" text-2xl text-white lg:mx-20 lg:mt-40 " id="slogan">
+          <div class="lg:w-5/12">
+            <h1 class="text-4xl font-semibold tracking-wide mb-5">Connect. Chat. Thrive.</h1>
+            <div class="w-11/12 text-base font-light mb-5">
+              <p>Where words transcend distance, our chat platform becomes the bridge of connection, fostering conversations that echo across the digital landscape.</p>
+            </div>
+            <a href="#" class="block  font-serif font-light  text-base py-1 mt-4 px-4 bg-fuchsia-700 rounded-xl  lg:inline-block  text-white hover:scale-110 transition duration-300 ease-in-out " id="join-button2">
+              Get Started
+          </a>
+          </div>
+        </div>
+        <div class="w-4/12 lg:-mt-8 lg:mx-16 hidden" id="signup-div">
+          <div class="lg:mx-10 w-100">
+            <div class=" mx-auto mt-10 bg-white shadow-md rounded px-8 pt-2 pb-4 mb-4">
+              <h3 class="font-bold font-serif tracking-wide text-xl text-fuchsia-600">Join Us</h3>
+                <form class="mt-2" id="signup-form">
+                  <div class="mb-2">
+                    <label class="block text-gray-900 text-sm font-bold mb-2" for="name">
+                      Name
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 font-semibold leading-tight  focus:border-purple-900 border-2 rounded p-2 outline-none" id="name" type="text" placeholder="Name">
+                  </div>
+                  <div class="mb-2">
+                    <label class="block text-gray-900 text-sm font-bold mb-2" for="email1">
+                      Email 
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 font-semibold leading-tight  focus:border-purple-900 border-2 rounded p-2 outline-none" id="email1" type="email" placeholder="Email">
+                  </div>
+                  <div class="mb-2">
+                    <label class="block text-gray-900 text-sm font-bold mb-2" for="phonenumber">
+                      Phone Number 
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 font-semibold leading-tight  focus:border-purple-900 border-2 rounded p-2 outline-none" id="phonenumber" type="tel" placeholder="Phone Number">
+                  </div>
+                  <div class="mb-0">
+                    <label class="block text-gray-900 text-sm font-bold mb-2" for="password1">
+                      Password 
+                    </label>
+                    <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-800 font-semibold mb-3 leading-tight  focus:border-purple-900 border-2 rounded p-2 outline-none" id="password1" type="password" placeholder="***********">
+                  </div>
+                  <div class="mb-4">
+                    <label class="block text-gray-900 text-sm font-bold mb-2" for="password2">
+                      Confirm Password 
+                    </label>
+                    <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-800 font-semibold mb-3 leading-tight  focus:border-purple-900 border-2 rounded p-2 outline-none" id="password2" type="password" placeholder="***********">
+                  </div>
+                  <div class="flex items-center justify-between mb-4">
+                    <button class="bg-gradient-to-r from-violet-950 via-violet-900 to-purple-950 text-white font-bold py-1 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="signup-button">
+                      Join
+                    </button>
+                </div>
+                
+                <h5 class="block mb-3"> Already have an account? <a class=" align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#" id="login-button">
+                    Log In
+                  </a></h5>
+                  <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded relative hidden" role="alert" id="alert1">
+                    <span class="block sm:inline">Joining Successfull.</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-2">
+                      <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                  </div>
+                  <div class="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-2 rounded relative hidden" role="alert" id="alert2">
+                    <span class="block sm:inline">User Already Exists.Please Log In</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-2">
+                      <svg class="fill-current h-6 w-6 text-amber-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                  </div>
+                  <div class="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-2 rounded relative hidden" role="alert" id="alert3">
+                    <span class="block sm:inline">Both Password Should Be Same.</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-2">
+                      <svg class="fill-current h-6 w-6 text-amber-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                  </div>
+                  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative hidden" role="alert" id="alert4">
+                    <span class="block sm:inline">Some Fields Missing.</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-2">
+                      <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                  </div>
+                </form>
+              </div>
+        </div>
+        </div>
+        
+        <div class="w-2/4 lg:-mt-8 lg:-mx-28 hidden" id="login-div">
+          <div class=" w-100" >
+            <div class="w-1/2 mx-auto my-20 bg-white shadow-md rounded px-8 pt-3 pb-4 mb-4">
+              <h3 class="font-bold font-serif tracking-wide text-xl text-fuchsia-600">Log In</h3>
+                <form class="mt-2" id="login-form">
+                  <div class="mb-4">
+                    <label class="block text-gray-900 text-sm font-bold mb-2" for="email2">
+                      Email
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 font-semibold leading-tight  focus:border-purple-900 border-2 rounded p-2 outline-none" id="email2" type="email" placeholder="Email">
+                  </div>
+                  <div class="mb-6">
+                    <label class="block text-gray-900 text-sm font-bold mb-2" for="password3">
+                      Password
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 font-semibold leading-tight  focus:border-purple-900 border-2 rounded p-2 outline-none" id="password3" type="password" placeholder="***********">
+                  </div>
+                  <div class="flex items-center justify-between mb-3">
+                    <button class="bg-gradient-to-r from-violet-950 via-violet-900 to-purple-950 text-white font-bold py-1 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="login-button">
+                      Log In
+                    </button>
+                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#" id="forget-password-link">
+                      Forgot Password?
+                    </a>
+                  </div>
+                  <h5 class="block mb-3"> If don't have an account ?<a class=" align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#" id="signup-button">
+                    Join
+                  </a></h5>
+                  <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded relative hidden" role="alert" id="alert5">
+                    <span class="block sm:inline">Log In Successfull.</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-2">
+                      <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                  </div>
+                  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative hidden" role="alert" id="alert6">
+                    <span class="block sm:inline">Password Not Matching.</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-2">
+                      <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                  </div>
+                  <div class="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-2 rounded relative hidden" role="alert" id="alert7">
+                    <span class="block sm:inline">User not exists,Please SignUp.</span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-2">
+                      <svg class="fill-current h-6 w-6 text-amber-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+                    </span>
+                  </div>
+                </form>
+                
+              </div>
+        </div>
+        </div>
+
+        <div class="w-2/4 lg:-mt-8 lg:-mx-28 hidden" id="forget-password-div">
+        <div class="w-1/2 mx-auto my-20 bg-white shadow-md rounded px-8 pt-3 pb-3 mb-4">
+          <h3 class="font-bold font-serif tracking-wide text-lg text-fuchsia-600">Reset Password</h3>
+            <form class="mt-3" id="forget-password-form">
               <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                <label class="block text-gray-900 text-sm font-bold mb-2" for="email3">
                   Email
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
-              </div>
-              <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                  Password
-                </label>
-                <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************">
+                <input class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-800 font-semibold mb-3 leading-tight  focus:border-purple-900 border-2 rounded p-2 outline-none" id="email3" type="email" placeholder="Email">
               </div>
               <div class="flex items-center justify-between mb-3">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="login-button">
-                  Log In
+                <button class="bg-gradient-to-r from-violet-950 via-violet-900 to-purple-950 text-white font-bold py-1 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="forget-password-button">
+                  Send
                 </button>
-                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                  Forgot Password?
-                </a>
               </div>
-              <h5 class="block mb-3"> If don't have an account? <a class=" align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#" id="signup-button">
-                Sign Up
-              </a></h5>
-              <div class="bg-green-100 border border-green-400 text-red-700 px-4 py-3 rounded relative hidden" role="alert" id="alert1">
-                <span class="block sm:inline">Log In Successfull.</span>
-                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                  <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+              <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded relative hidden" role="alert" id="alert8">
+                <span class="block sm:inline">Mail Sent,Check Inbox.</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-2">
+                  <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
                 </span>
               </div>
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative hidden" role="alert" id="alert2">
-                <span class="block sm:inline">Password Not Matching.</span>
-                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                  <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
-                </span>
-              </div>
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative hidden" role="alert" id="alert3">
-                <span class="block sm:inline">User not exists,pls SignUp.</span>
-                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative hidden" role="alert" id="alert9">
+                <span class="block sm:inline">User not exists, Please SignUp.</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-2">
                   <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
                 </span>
               </div>
             </form>
             
           </div>
-    </div>
-    
+
+        </div>
+
+      </div>
+
+    <script src="/js/home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
-<script src="../public/js/home.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </html>
