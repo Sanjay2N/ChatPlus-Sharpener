@@ -1,7 +1,7 @@
 const sequelize=require("../util/database");
 const Sequelize=require("sequelize");
 
-const Chat=sequelize.define("chat",{
+const Chat=sequelize.define("chathistory",{
     id:{
 
         type:Sequelize.INTEGER,
@@ -17,6 +17,10 @@ const Chat=sequelize.define("chat",{
     isImage:{
         type:Sequelize.BOOLEAN,
         defaultValue:false
+    },
+    imgurl:{
+        type:Sequelize.STRING,
+        allowNull:true
     },
     date:{
         type:Sequelize.DATE,

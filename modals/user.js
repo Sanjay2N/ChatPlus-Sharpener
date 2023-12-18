@@ -23,6 +23,10 @@ const User=sequelize.define("user",{
     password:{
         type:Sequelize.STRING,
         allowNull:false
+    },
+    imgurl:{
+        type:Sequelize.STRING,
+        allowNull:true
     }
 });
 

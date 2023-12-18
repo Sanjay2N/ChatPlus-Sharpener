@@ -7,7 +7,10 @@ const cookieParser = require('cookie-parser');
 const cors=require('cors');
 const ForgotPassword=require("./modals/forgotPassword");
 const User=require("./modals/user");
-const Chat=require("./modals/chat");
+const chatHistory=require("./modals/chatHistory");
+const Group=require("./modals/group");
+const UserGroup=require("./modals/userGroup");
+
 
 const sequelize=require('./util/database')
 
@@ -32,8 +35,15 @@ app.use("/chat",chatRoutes);
 
 User.hasMany(ForgotPassword);
 ForgotPassword.belongsTo(User,{onDelete:"CASCADE"});
-User.hasMany(Chat);
-Chat.belongsTo(User,{onDelete:"CASCADE"});
+User.hasMany(chatHistory);
+chatHistory.belongsTo(User,{ constraints: true });
+User.belongsToMany(Group,{through:UserGroup});
+Group.belongsToMany(User,{through:UserGroup})
+chatHistory.belongsTo(Group);
+Group.hasMany(chatHistory);
+Group.belongsTo(User,{foreignKey: 'AdminId',constraints:true,onDelete:'CASCADE'})
+
+
 
 const PORT=process.env.PORT || 2000;
 sequelize

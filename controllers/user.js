@@ -1,7 +1,10 @@
 const User=require("../modals/user");
+const Group=require("../modals/group");
 const bcrypt=require("bcrypt");
 const jwt=require('jsonwebtoken');
 const userServices=require("../services/userService");
+const { request, response } = require("express");
+const {Op}=require("sequelize");
 
 
 function isNotValidInput(inputs){
@@ -55,6 +58,151 @@ exports.logIn=async(request,response)=>{
             return response.status(500).json(error);
         }
 }
+
+
+exports.getAllUser=async(request,response)=>{
+    try{
+        const user=request.user;
+        const userList= await User.findAll({where:{id:{ [Op.ne]: user.id}}});
+        console.log("/////////////////////////////////////////////////////////////////////////////////////////////////")
+        console.log(userList);
+        return response.status(200).json(userList);
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+
+exports.createGroup=async(request,response)=>{
+    try{
+        console.log("[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]")
+        const user=request.user;
+        console.log(request.body)
+        const {name,description,members,nomember}=request.body;
+        const group = await user.createGroup({
+            name:name,
+            description:description,
+            nomember:nomember,
+            AdminId: user.id
+        })
+        members.push(user.id);
+        await group.addUsers(members.map((ele) => {
+            return Number(ele)
+        }));
+        return response.status(200).json({ group, message: "Group is succesfylly created" })
+
+    }
+    catch(error){
+        console.log(error)
+        return response.status(500).json({message:"server error"});
+    }
+}
+
+exports.getUserGroups=async (request,response)=>{
+    try{
+        const user=request.user;
+        const groups=await user.getGroups();
+        return response.status(200).json(groups);
+    }
+    catch(error){
+        console.log(error)
+        response.status(500).json({message:"server error"});
+    }
+    
+    
+}
+
+
+
+exports.getGroupDetails=async(request,response)=>{
+    try{
+        const id=request.params.groupId;
+        console.log(request.params)
+        console.log(request.query)
+        const groupDetail=await Group.findOne({where:{id:id}}); 
+        return response.status(200).json(groupDetail);
+    }
+    catch(error){
+        console.log(error)
+        response.status(500).json({message:"server error"});
+    }
+    
+
+}
+
+exports.getGroupMembers=async(request,response)=>{
+    try{
+        const id = request.params.groupId;
+        const group = await Group.findOne({ where: { id:id } });
+        const usersData = await group.getUsers();
+        const users = usersData.map((user) => {
+            return {
+                id: user.id,
+                name: user.name,
+            }
+        })
+
+        return response.status(200).json(users)
+    }
+    catch(error){
+        console.log(error)
+        response.status(500).json({message:"server error"});
+    }
+}
+
+
+exports.getAllUsers=async (request,response)=>{
+    try{
+        const allUserData=await User.findAll({
+            attributes: ['id', 'name', 'imgurl'],
+            where:{id:{[Op.ne]:request.user.id}}
+        });
+        return response.status(200).json(allUserData);
+    }
+    catch(error){
+        console.log(error)
+        response.status(500).json({message:"server error"});
+    }
+}
+
+exports.updateGroup=async (request,response)=>{
+    try{
+
+    
+        const {groupId}=request.params;
+        const user = request.user;
+        const group = await Group.findOne({ where: { id:groupId } });
+        const { name,description,members,nomember } = request.body;
+        const updatedGroup = await group.update({
+            name:name,
+            nomember:nomember,
+            description:description,
+            AdminId: user.id
+        })
+        members.push(user.id);
+        await updatedGroup.setUsers(null);
+        await updatedGroup.addUsers(members);
+        return response.status(200).json({message: "Group is succesfylly updated" })
+
+    } catch (error) {
+        console.log(error);
+        return response.status(500).json({ message: 'Internal Server error!' })
+    }
+}
+
+exports.getuserDetails=async(request,response)=>{
+    try{
+        return response.status(200).json({userId:request.user.id});
+    }
+    catch(error){
+        console.log(error)
+
+        response.status(500).json({message:"server error"});
+
+    }
+}
+
 
 exports.mainPage=(request,response)=>{
     response.status(200).sendFile("main.html",{root:"views"});
