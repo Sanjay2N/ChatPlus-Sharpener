@@ -1,7 +1,23 @@
+let groupId=1;
+const socket = io(window.location.origin);
+// socket.on('common-message', () => {
+//     if (formElements.message_btn.id == 0) {
+//         ShowCommonChats();
+//     }
+
+// })
+socket.on('group-message', (Id) => {
+    if (groupId== Id) {
+        getMessages(groupId);
+    }
+})
+
+
+
 const messageSection=document.querySelector("#message-section");
 const messageInput=messageSection.querySelector("#message-input");
 const sendButton=messageSection.querySelector("#send-button");
-let groupId=1;
+
 
 
 sendButton.addEventListener("click",sendMessage)
@@ -20,6 +36,8 @@ async function sendMessage(event){
         await axios.post("http://localhost:2000/chat/messages",data);
         addMessage(messageContent);
         messageInput.value="";
+        socket.emit('new-group-message', groupId)
+        getMessages(groupId);
     }
     catch(error){
         
@@ -28,8 +46,8 @@ async function sendMessage(event){
     
 }
 // document.addEventListener("DOMContentLoaded",getMessages);
-getMessages();
-async function getMessages(){
+getMessages(groupId);
+async function getMessages(groupId){
     try{
         console.log(".........................................")
         if(groupId==1){
@@ -66,10 +84,7 @@ async function getMessages(){
         const messages=response.data;
         console.log("print inside of teh get mesages")
         showMessage(messages);
-        // setTimeout(()=>{
-        //     console.log(".......................////////////////////////////////  ",groupId);
-        //     getMessages();
-        // }, 2000);
+  
 
     }
     catch(error){
@@ -210,6 +225,7 @@ function switchGroup(id){
     alterGroupStyle(groupId,id);
     groupId=id;
     setUpGroupHeader(groupId);
+    getMessages(groupId)
 
 }
 const groupElements={

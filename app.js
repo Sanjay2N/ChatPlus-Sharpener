@@ -3,6 +3,9 @@ require('dotenv').config();
 
 
 const express=require('express');
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+const { instrument } = require('@socket.io/admin-ui');
 const cookieParser = require('cookie-parser');
 const cors=require('cors');
 const ForgotPassword=require("./modals/forgotPassword");
@@ -24,6 +27,23 @@ app.use(cors({
     methods:['GET','POST'],
   
   }));
+
+const httpServer = createServer(app);
+const io = new Server(httpServer, { 
+    cors:{
+        origin: ["https://admin.socket.io",],
+        credentials: true
+      }
+ });
+
+ 
+io.on("connection", (socket) => {
+    socket.on('new-group-message', (groupId)=> {
+        socket.broadcast.emit('group-message',groupId);
+    })
+  });
+  
+instrument(io, { auth: false })
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -50,7 +70,7 @@ sequelize
 .sync()
 // .sync({force:true})
 .then(res=>{
-    app.listen(PORT,()=>{
+    httpServer.listen(PORT,()=>{
         console.log("Server started at port "+PORT);
     });
     
