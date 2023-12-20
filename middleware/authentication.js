@@ -5,6 +5,8 @@ const secretKey = process.env.SECRETE_KEY;
 exports.authorization = async(request,response,next)=>{
     try {
         const token = request.cookies.token;
+        console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,")
+        console.log(token)
         const decode = jwt.verify(token,secretKey);
         const user= await User.findByPk(decode.userId);
         if(user){

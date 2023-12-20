@@ -8,6 +8,7 @@ const { Server } = require("socket.io");
 const { instrument } = require('@socket.io/admin-ui');
 const cookieParser = require('cookie-parser');
 const cors=require('cors');
+const bodyParser=require("body-parser");
 const ForgotPassword=require("./modals/forgotPassword");
 const User=require("./modals/user");
 const chatHistory=require("./modals/chatHistory");
@@ -44,7 +45,7 @@ io.on("connection", (socket) => {
   });
   
 instrument(io, { auth: false })
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(cookieParser());

@@ -102,9 +102,16 @@
               <!-- Add more chat messages here -->
           </div>
           <div class=" mt-4 flex items-center mt-5">
+            <form action="" id="chat-form">
+              <label for="fileInput" class="flex items-center justify-center   text-black rounded-md cursor-pointer  focus:outline-none">
+                <i class="fa-solid fa-plus"></i>
+                <input id="fileInput" type="file" accept="image/*" class="hidden" onchange="handleFileSelect()">
+              </label>
+              <input type="text" class="hidden" value="text" id="chat-type">
               <input type="text" placeholder="Type your message..." class="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none" id="message-input">
               <button class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-md" id="send-button">Send</button>
-          </div>
+            </form>
+            </div>
       </div>
 
   </main>

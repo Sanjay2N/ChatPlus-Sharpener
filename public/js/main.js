@@ -15,29 +15,77 @@ socket.on('group-message', (Id) => {
 
 
 const messageSection=document.querySelector("#message-section");
-const messageInput=messageSection.querySelector("#message-input");
-const sendButton=messageSection.querySelector("#send-button");
+const chatForm=messageSection.querySelector("#chat-form");
+const messageInput=chatForm.querySelector("#message-input");
+const sendButton=chatForm.querySelector("#send-button");
+const fileInput = chatForm.querySelector('#fileInput');
+const chatType = chatForm.querySelector('#chat-type');
 
 
 
 sendButton.addEventListener("click",sendMessage)
 
+function handleFileSelect() {
+
+    if (fileInput.files.length > 0) {
+      const selectedFileName = fileInput.files[0].name;
+      console.log("file name ",selectedFileName)
+      console.log("inside of file handle   ")
+      messageInput.value = `Selected File: ${selectedFileName}`;
+      chatType.value="image";
+    } else {
+        messageInput.value = ``;
+    }
+  }
+
 async function sendMessage(event){
     try{
         event.preventDefault();
-        const messageContent=messageInput.value;
-        if (messageContent==""){return;}
-        const data={
-            message:messageContent,
-            groupId:groupId
+        if(chatType.value==="text"){
+            console.log("text type ")
+            const messageContent=messageInput.value;
+            if (messageContent==""){return;}
+            const data={
+                message:messageContent,
+                groupId:groupId
+            }
+            console.log(axios)
+            console.log(",jnuwegyfyubfewb")
+            await axios.post("http://localhost:2000/chat/message",data);
+            addMessage(messageContent);
+            
         }
-        console.log(axios)
-        console.log(",jnuwegyfyubfewb")
-        await axios.post("http://localhost:2000/chat/messages",data);
-        addMessage(messageContent);
-        messageInput.value="";
+        else{
+            console.log("image type ")
+            const file = fileInput.files[0];
+            // console.log(fileInput.files);
+            // const formData=new FormData();
+            // formData.append('groupId',groupId);
+            // formData.append("image",file);
+           
+            // const formData = new For mData();
+            // formData.append('image', file);
+            //  formData.append('groupId',groupId)
+        //     console.log("formdata ",formData)
+        //    await axios.post('chat/image',formData);
+
+           const formData = new FormData();
+           formData.append('image', file);
+           formData.append('groupId',groupId)
+           formData.forEach((value, key) => {
+            console.log("key value ",key, value);
+          });
+           const imageResponse = await axios.post('chat/image',formData);
+
+
+        }
+        console.log("form reset")
+        chatForm.reset();
+    
         socket.emit('new-group-message', groupId)
         getMessages(groupId);
+
+        
     }
     catch(error){
         
