@@ -1,4 +1,7 @@
 body{
+    background-image: url(../images/home.png) !important;
+    background-size: cover !important;
+    background-position: center !important;
     scroll-behavior: smooth;
 }
 
@@ -26,4 +29,3 @@ body{
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-

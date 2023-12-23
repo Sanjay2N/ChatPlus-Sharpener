@@ -17,28 +17,17 @@ const Group=sequelize.define("group",{
         type:Sequelize.STRING,
         allowNull:true
     },
-    imgurl:{
-        type:Sequelize.STRING,
-        allowNull:true
-    },
     nomember:{
         type:Sequelize.INTEGER,
         allowNull:false
     },
-    // date:{
-    //     type:Sequelize.DATE,
-    //     defaultValue:Sequelize.NOW
-    // },
-
 },{
     timestamps:false
 });
 
 
 Group.afterSync(options => {
-    // Check if the table does not exist yet
     if (options.force) {
-      // Add a default row here
       return Group.create({
         name: 'Common Group',
         description: 'Default Description',

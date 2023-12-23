@@ -1,7 +1,5 @@
 require('dotenv').config();
 
-
-
 const express=require('express');
 const { createServer } = require("http");
 const { Server } = require("socket.io");
@@ -9,12 +7,16 @@ const { instrument } = require('@socket.io/admin-ui');
 const cookieParser = require('cookie-parser');
 const cors=require('cors');
 const bodyParser=require("body-parser");
+
+
 const ForgotPassword=require("./modals/forgotPassword");
 const User=require("./modals/user");
 const chatHistory=require("./modals/chatHistory");
 const Group=require("./modals/group");
 const UserGroup=require("./modals/userGroup");
+const LastSeen=require("./modals/lastSeen");
 
+const cronService = require('./services/cron');
 
 const sequelize=require('./util/database')
 
@@ -26,7 +28,6 @@ const app=new express();
 app.use(cors({
     origin: '*',
     methods:['GET','POST'],
-  
   }));
 
 const httpServer = createServer(app);
@@ -45,6 +46,7 @@ io.on("connection", (socket) => {
   });
   
 instrument(io, { auth: false })
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -53,18 +55,23 @@ app.use(cookieParser());
 app.use("",homeRoutes);
 app.use("/user",userRoutes);
 app.use("/chat",chatRoutes);
+app.use("",(req,res) =>{
+    res.sendFile('page404.html',{root:'views'});
+});
 
 User.hasMany(ForgotPassword);
 ForgotPassword.belongsTo(User,{onDelete:"CASCADE"});
 User.hasMany(chatHistory);
 chatHistory.belongsTo(User,{ constraints: true });
 User.belongsToMany(Group,{through:UserGroup});
-Group.belongsToMany(User,{through:UserGroup})
+Group.belongsToMany(User,{through:UserGroup});
 chatHistory.belongsTo(Group);
 Group.hasMany(chatHistory);
 Group.belongsTo(User,{foreignKey: 'AdminId',constraints:true,onDelete:'CASCADE'})
+User.belongsToMany(Group,{through:LastSeen});
+Group.belongsToMany(User,{through:LastSeen});
 
-
+cronService.job.start();
 
 const PORT=process.env.PORT || 2000;
 sequelize

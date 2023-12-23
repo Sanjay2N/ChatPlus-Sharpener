@@ -11,17 +11,14 @@ const Chat=sequelize.define("chathistory",{
 
     },
     message:{
-        type:Sequelize.STRING,
+        type:Sequelize.TEXT,
         allowNull:false
     },
     isImage:{
         type:Sequelize.BOOLEAN,
         defaultValue:false
     },
-    imgurl:{
-        type:Sequelize.STRING,
-        allowNull:true
-    },
+
     date:{
         type:Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'), 

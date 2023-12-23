@@ -10,13 +10,11 @@ const tranEmailApi = new Sib.TransactionalEmailsApi();
 exports.forgotPassword = async (request, response) => {
     try {
         const { email } = request.body;
-        console.log(email)
         const user= await User.findOne({
             where: {
                 email: email
             }
         });
-        console.log(user)
         if (user) {
             const sender = {
                 email: 'sanjaykcbcs@gmail.com',
@@ -61,9 +59,9 @@ exports.forgotPassword = async (request, response) => {
                     role: id
                 }
             })
-            response.status(200).json({ message: 'Password reset email sent' });
+            return response.status(200).json({ message: 'Password reset email sent' });
         } else {
-            response.status(404).json({ message: 'User not exists' });
+           return  response.status(404).json({ message: 'User not exists' });
         }
 
 
@@ -79,20 +77,21 @@ exports.ResetpasswordPage= async (request, response, next) => {
         if (passwordreset.isactive) {
             passwordreset.isactive = false;
             await passwordreset.save();
-            response.sendFile('forgotPassword.html',{root:'views'})
+            return response.sendFile('forgotPassword.html',{root:'views'})
         } else {
             return response.status(401).json({ message: "Link has been expired" })
         }
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        response.status(500).json({ message: 'Interenal Server Error' });
+
     }
 }
 
 exports.updatePassword = async (request, response, next) => {
     try {
         const { resetId, newpassword } = request.body;
-        console.log(resetId, newpassword)
         const passwordreset = await ForgotPasswords.findByPk(resetId);
         const currentTime = new Date();
         const createdAtTime = new Date(passwordreset.createdAt);
@@ -100,22 +99,18 @@ exports.updatePassword = async (request, response, next) => {
         const timeLimit = 60 * 60 * 1000; 
         if(timeDifference <= timeLimit){
             const hashedPassword = await bcrypt.hash(newpassword, 10);
-            console.log(passwordreset)
-          await User.update(
-                {
-                    password: hashedPassword
-                },
-                {
-                    where: { id: passwordreset.userId }
-                }
-            );
-            response.status(200).json({ message: "Password reset successful." });
+            await User.update(
+                    {
+                        password: hashedPassword
+                    },
+                    {
+                        where: { id: passwordreset.userId }
+                    }
+                );
+            return response.status(200).json({ message: "Password reset successful." });
         }else{
-            response.status(403).json({ message: "Link has expired Generate a new link"});
+            return response.status(403).json({ message: "Link has expired Generate a new link"});
         }
-
-
-
     } catch (error) {
         console.log(error)
         response.status(500).json({ message: "Internal server error" });

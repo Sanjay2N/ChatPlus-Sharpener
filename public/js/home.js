@@ -1,5 +1,4 @@
 // navbar
-
 const navbar=document.querySelector("#nav");
 const homeButton=navbar.querySelector("#home-button");
 const loginButton=navbar.querySelector("#login-button");
@@ -46,7 +45,6 @@ function switchDivs(divElement){
 }
 
 
-
 // signup part
 const signUpForm=document.querySelector("#signup-form");
 const signUpElements={
@@ -61,6 +59,7 @@ const signUpElements={
     alert2:signUpForm.querySelector("#alert2"),
     alert3:signUpForm.querySelector("#alert3"),
     alert4:signUpForm.querySelector("#alert4"),
+    alert10:signUpForm.querySelector("#alert10"),
     
 }
 signUpElements.loginLink.onclick=(e)=>{
@@ -81,14 +80,25 @@ async function signUp(event){
             const password1=signUpElements.password1.value;
             const password2=signUpElements.password2.value;
 
-            if(password1==password2){
+            if(password1.length<4){
+                alertFunction(signUpElements.alert10);
+                signUpElements.password1.value="";
+                signUpElements.password2.value="";
+            }
+            else if(password1!=password2){
+                alertFunction(signUpElements.alert3);
+                signUpElements.password1.value="";
+                signUpElements.password2.value="";
+            }
+            else{
                 const userDetails={
                     name:name,
                     email:email,
                     phonenumber:phonenumber,
                     password:password1
-                }
-                await axios.post("http://localhost:2000/user/signup",userDetails);
+            }
+            
+                await axios.post("user/signup",userDetails);
                 alertFunction(signUpElements.alert1);
                 signUpForm.reset();
                 setTimeout(() => {
@@ -96,12 +106,6 @@ async function signUp(event){
                     changeButtonColor(loginButton);
                     curretActiveButton=loginButton;
                 }, 2100);
-                
-            }
-            else{
-                alertFunction(signUpElements.alert3);
-                signUpElements.password1.value="";
-                signUpElements.password2.value="";
             }
             
         }
@@ -146,7 +150,7 @@ async function forgotPassward(event){
     try{
         event.preventDefault();
         const userEmail = forgetElement.emailInput.value;
-        await axios.post("http://localhost:2000/user/forgotpassword", {email: userEmail});
+        await axios.post("user/forgotpassword", {email: userEmail});
         alertFunction(forgetElement.alert1);
         forgetElement.emailInput.innerText="";
         setTimeout(()=>{
@@ -156,14 +160,12 @@ async function forgotPassward(event){
     }
     catch(error){
         if(error.response && error.response.status === 404){
-            alertFunction(forgetText.alert2);
+            alertFunction(forgetElement.alert2);
         }
         else{
             console.log(error);
         }
     }
-    
-
 }
 
 
@@ -171,7 +173,6 @@ async function forgotPassward(event){
 
 // login part
 const logInForm=document.querySelector("#login-form");
-console.log(logInForm)
 const logInElements={
     logInButton:logInForm.querySelector("#login-button"),
     email:logInForm.querySelector("#email2"),
@@ -188,9 +189,7 @@ logInElements.signUpLink.onclick=(e)=>{
     changeButtonColor(joinButton1);
     curretActiveButton=joinButton1;
 }
-console.log(logInElements.forgetPasswordLink)
 logInElements.forgetPasswordLink.onclick=(e)=>{
-    console.log("inside of the div")
     e.preventDefault();
     switchDivs(forgetPasswordDiv);
 }
@@ -200,16 +199,16 @@ logInElements.logInButton.addEventListener("click",logIn);
 async function  logIn(event){
     try{
         event.preventDefault();
-        
         const credentials={
                 email:logInElements.email.value,
                 password:logInElements.password.value  
-                        }
-        console.log(credentials);
-        await axios.post("http://localhost:2000/user/login",credentials);
+                }
+        await axios.post("user/login",credentials);
         alertFunction(logInElements.alert1);
         logInForm.reset();
-        window.location.href="user";
+        setTimeout(()=>{
+            window.location.href="user";
+        },2000)
     }
     catch(error){
         if (error.response && error.response.status === 404) {
@@ -223,7 +222,6 @@ async function  logIn(event){
         }
         else {
             alert("Something went wrong - login again")
-            console.error("An error occurred:", error);
         }
         
     }

@@ -11,8 +11,6 @@ const forgotpasswordElements={
     alert2:forgotPasswordDiv.querySelector("#alert2")
 }
 
-console.log(forgotPasswordDiv.resetButton)
-console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
 forgotpasswordElements.resetButton.onclick=resetPassword;
 async function resetPassword(event){
     try{
@@ -27,7 +25,6 @@ async function resetPassword(event){
 
             await axios.post(`../updatepassword`, data); 
             alertFunction(forgotpasswordElements.alert1);
-            console.log("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
             setTimeout(()=>{
                 window.location.href = `../../home`;
             },3000);

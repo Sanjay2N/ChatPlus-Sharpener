@@ -24,10 +24,7 @@ const User=sequelize.define("user",{
         type:Sequelize.STRING,
         allowNull:false
     },
-    imgurl:{
-        type:Sequelize.STRING,
-        allowNull:true
-    }
+    
 });
 
 module.exports=User;
